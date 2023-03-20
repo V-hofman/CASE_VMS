@@ -2,6 +2,7 @@
 <sub>or dont ¯\\_(ツ)_/¯</sub>
 
 ---
+<sub>Let op! Dit document is geschreven zodat het in visual studio code met de "[Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)" extension presenteerbaar is. Ik garandeer niet dat dit er mooi uitziet op andere plekken</sub>
 ## Systeem Eisen:
 De frontend is ontwikkeld met:
 - Angular versie 15.2.2
