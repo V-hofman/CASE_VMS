@@ -1,8 +1,10 @@
-﻿namespace CASE_VMS_Backend.Courses.Repository
+﻿using CASE_VMS_Backend.Courses.Models;
+
+namespace CASE_VMS_Backend.Courses.Repository
 {
     public interface ICourseRepository
     {
-        Task<IEnumerable<CourseDTO>> GetAllAsync();
-        Task<CourseDTO> AddAsync(CourseDTO newCourse);
+        Task<IEnumerable<CourseResponseDTO>> GetAllAsync();
+        Task<CourseResponseDTO> AddAsync(CourseResponseDTO newCourse);
     }
 }

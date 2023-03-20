@@ -1,15 +1,27 @@
-﻿using System.Text;
+﻿using CASE_VMS_Backend.Courses.Models;
+using CASE_VMS_Backend.Courses.Repository;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CASE_VMS_Backend.Courses.FileHandler
 {
     public class FileToCourseParser
     {
-
-        public List<string> Index(IFormFile file) => ReadAsList(file);
-
-        public CourseDTO ParseFile(IFormFile file)
+        public FileToCourseParser(ICourseRepository courseRepo)
         {
-            var course = new CourseDTO();
+            this.courseRepo = courseRepo;
+        }
+
+        private ICourseRepository courseRepo { get; set; }
+
+        public List<WrapperModel> CourseWrappers { get; set; }
+        public List<CourseModel> Courses { get; set; } = new();
+        public List<CourseResponseDTO> CourseResponseDTOs { get; set; } = new();
+            
+        public void ParseFile(IFormFile file)
+        {
+            CourseWrappers = new List<WrapperModel>();
+            var courseWrapper = new WrapperModel();
 
             using (var reader = new StreamReader(file.OpenReadStream()))
             {
@@ -18,35 +30,51 @@ namespace CASE_VMS_Backend.Courses.FileHandler
                     switch (reader.ReadLine())
                     {
                         case string a when a.Contains("Titel:"):
-                            course.Title = a;
+                            courseWrapper.Title = a.Split(":")[1];
                             break;
                         case string b when b.Contains("Cursuscode:"):
-                            course.Title = b;
+                            courseWrapper.CourseCode = b.Split(":")[1];
                             break;
                         case string c when c.Contains("Duur:"):
-                            course.Title = c;
+                            courseWrapper.Duration = int.Parse(Regex.Match(c.Split(":")[1], @"\d+").Value );
                             break;
-                        case string d when d.Contains("StartDatum:"):
-                            course.Title = d;
+                        case string d when d.Contains("Startdatum:"):
+                            courseWrapper.StartDate = DateOnly.ParseExact(d.Split(":")[1].Trim(), "d/MM/yyyy");
+                            break;
+                        case string e when string.IsNullOrWhiteSpace(e):
+                            CourseWrappers.Add(courseWrapper);
+                            courseWrapper = new WrapperModel();
                             break;
                     }
 
                 }
             }
 
-
-            return course;
+            ParseWrappers();
+            return;
         }
 
-        public List<string> ReadAsList(IFormFile file)
+        public void ParseWrappers()
         {
-            var result = new StringBuilder();
-            using (var reader = new StreamReader(file.OpenReadStream()))
+            foreach (var wrapper in CourseWrappers)
             {
-                while (reader.Peek() >= 0)
-                    result.AppendLine(reader.ReadLine());
+                var Course = new CourseModel(durationInDays: wrapper.Duration, courseTitle: wrapper.Title, courseCode: wrapper.CourseCode);
+                var CourseResponse = new CourseResponseDTO(duration: wrapper.Duration, title: wrapper.Title, startDate: wrapper.StartDate);
+
+                Courses.Add(Course);
+                CourseResponseDTOs.Add(CourseResponse);
+                Console.WriteLine(Course);
             }
-            return result.ToString().Split(Environment.NewLine).ToList();
+            PushToDataBase();
         }
+
+        public void PushToDataBase()
+        {
+            foreach (var Response in CourseResponseDTOs)
+            {
+                courseRepo.AddAsync(Response);
+            }
+        }
+
     }
 }
