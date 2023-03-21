@@ -31,7 +31,7 @@ namespace CASE_VMS_Backend.Courses.Endpoints
         {
 
             var AmountOfDupes = _fileToCourseParser.ParseFile(file);
-            return Ok(file.FileName + " Succesfully added! and " + AmountOfDupes[0] + " Course dupes were found and re-used! And " + AmountOfDupes[1] + " Instance dupes were found and skipped!");
+            return Created(file.FileName + " Succesfully added! and " + AmountOfDupes[0] + " Course dupes were found and re-used! And " + AmountOfDupes[1] + " Instance dupes were found and skipped!", null);
 
         }
     }
