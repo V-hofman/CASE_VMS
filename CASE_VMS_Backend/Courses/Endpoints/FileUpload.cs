@@ -1,4 +1,5 @@
-﻿using CASE_VMS_Backend.Courses.FileHandler;
+﻿using CASE_VMS_Backend.Courses.Exceptions;
+using CASE_VMS_Backend.Courses.FileHandler;
 using CASE_VMS_Backend.Courses.Models;
 using CASE_VMS_Backend.Courses.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -28,10 +29,15 @@ namespace CASE_VMS_Backend.Courses.Endpoints
         [HttpPost]
         public async Task<ActionResult<CourseResponseDTO>> PostCourse(IFormFile file)
         {
-
-            _fileToCourseParser.ParseFile(file);
-
-            return Ok();
+            try
+            {
+                _fileToCourseParser.ParseFile(file);
+                return Ok(file.FileName + " Succesfully added!");
+            }
+            catch (DuplicateEntryException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

@@ -1,25 +1,32 @@
-﻿using CASE_VMS_Backend.Courses.Models;
+﻿using CASE_VMS_Backend.Courses.Exceptions;
+using CASE_VMS_Backend.Courses.Models;
+using CASE_VMS_Backend.DAL;
+using Microsoft.EntityFrameworkCore;
 
 namespace CASE_VMS_Backend.Courses.Repository
 {
     public class CourseRepository : ICourseRepository
     {
-        List<CourseResponseDTO> Courses = new List<CourseResponseDTO>
+        private readonly CourseContext _context;
+        public CourseRepository(CourseContext context)
         {
-         new CourseResponseDTO{  Duration = 5, Title = "Introduction to C#", StartDate = DateOnly.FromDateTime(DateTime.Now), NumberOfSignedIn =  5 },
-         new CourseResponseDTO{  Duration = 5, Title = "Introduction to Java", StartDate = DateOnly.FromDateTime(DateTime.Now), NumberOfSignedIn =  5  },
-         new CourseResponseDTO{  Duration = 5, Title = "Introduction to Python", StartDate = DateOnly.FromDateTime(DateTime.Now), NumberOfSignedIn =  5 }
-        };
+            this._context = context;
+        }
 
-        public Task<CourseResponseDTO> AddAsync(CourseResponseDTO newCourse)
+        public Task<CourseModel> AddAsync(CourseModel newCourse)
         {
-            this.Courses.Add(newCourse);
+            if (_context.Courses.FirstOrDefault(c => c.CourseCode == newCourse.CourseCode) != null)
+            {
+                throw new DuplicateEntryException("Course with Code " + newCourse.CourseCode + " already exists");
+            }
+            _context.Courses.Add(newCourse);
+            _context.SaveChanges();
             return Task.FromResult(newCourse);
         }
 
-        public async Task<IEnumerable<CourseResponseDTO>> GetAllAsync()
+        public async Task<List<CourseModel>> GetAllAsync()
         {
-            return Courses;
+            return await this._context.Courses.Include(c => c.CourseInstances).ToListAsync();
         }
     }
 }

@@ -4,7 +4,7 @@ namespace CASE_VMS_Backend.Courses.Repository
 {
     public interface ICourseRepository
     {
-        Task<IEnumerable<CourseResponseDTO>> GetAllAsync();
-        Task<CourseResponseDTO> AddAsync(CourseResponseDTO newCourse);
+        Task<List<CourseModel>> GetAllAsync();
+        Task<CourseModel> AddAsync(CourseModel newCourse);
     }
 }

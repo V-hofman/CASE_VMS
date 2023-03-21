@@ -70,9 +70,10 @@ namespace CASE_VMS_Backend.Courses.FileHandler
 
         public void PushToDataBase()
         {
-            foreach (var Response in CourseResponseDTOs)
+            foreach (var course in Courses)
             {
-                courseRepo.AddAsync(Response);
+
+                courseRepo.AddAsync(course);
             }
         }
 
