@@ -2,6 +2,17 @@
 {
     public class CourseInstance
     {
+        public CourseInstance(DateOnly startTime)
+        {
+            StartTime = startTime;
+        }
+
+        public CourseInstance(DateOnly startTime, CourseModel course)
+        {
+            StartTime = startTime;
+            Course = course;
+        }
+
         public int Id { get; set; }
         public DateOnly StartTime { get; set; }
 

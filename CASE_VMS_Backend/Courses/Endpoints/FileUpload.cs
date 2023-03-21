@@ -29,15 +29,10 @@ namespace CASE_VMS_Backend.Courses.Endpoints
         [HttpPost]
         public async Task<ActionResult<CourseResponseDTO>> PostCourse(IFormFile file)
         {
-            try
-            {
-                _fileToCourseParser.ParseFile(file);
-                return Ok(file.FileName + " Succesfully added!");
-            }
-            catch (DuplicateEntryException e)
-            {
-                return BadRequest(e.Message);
-            }
+
+            var AmountOfDupes = _fileToCourseParser.ParseFile(file);
+            return Ok(file.FileName + " Succesfully added! and " + AmountOfDupes[0] + " Course dupes were found and re-used! And " + AmountOfDupes[1] + " Instance dupes were found and skipped!");
+
         }
     }
 }

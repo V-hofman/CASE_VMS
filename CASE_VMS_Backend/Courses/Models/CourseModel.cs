@@ -39,6 +39,8 @@
         public int Duration { get; set; }
         public string Title { get; set; }
         public int NumberOfSignedIn { get; set; }
+
+        public List<int> Duplicates { get; set; }
     }
 
 }

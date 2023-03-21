@@ -24,6 +24,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddSingleton<CourseContext>();
 builder.Services.AddTransient<ICourseRepository, CourseRepository>();
+builder.Services.AddTransient<ICourseInstanceRepository, CourseInstanceRepository>();
 builder.Services.AddTransient<FileToCourseParser>();
 
 var app = builder.Build();
