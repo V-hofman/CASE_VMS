@@ -13,10 +13,13 @@
             CourseCode = courseCode;
         }
 
-        public int CourseID { get; set; }
+        public int CourseModelID { get; set; }
         public int DurationInDays { get; set; }
         public string CourseTitle { get; set; }
         public string CourseCode { get; set; }
+
+
+        public List<CourseInstance> CourseInstances { get; set; }
     }
 
     public class CourseResponseDTO
