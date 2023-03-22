@@ -34,7 +34,7 @@ namespace CASE_VMS_Backend.Courses.Repository
 
         public async Task<List<CourseInstance>> GetAllAsync()
         {
-            return await this._context.CourseInstances.ToListAsync();
+            return await this._context.CourseInstances.Include(ci => ci.Course).ToListAsync();
         }
 
     }
