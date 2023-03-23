@@ -1,6 +1,6 @@
 ﻿using CASE_VMS_Backend.Courses.Exceptions;
 using CASE_VMS_Backend.Courses.Models;
-using CASE_VMS_Backend.Courses.Repository;
+using CASE_VMS_Backend.Courses.Repository.Interfaces;
 using Moq;
 using System;
 using System.Collections.Generic;

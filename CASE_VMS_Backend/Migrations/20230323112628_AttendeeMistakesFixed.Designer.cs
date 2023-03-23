@@ -4,6 +4,7 @@ using CASE_VMS_Backend.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CASE_VMS_Backend.Migrations
 {
     [DbContext(typeof(CourseContext))]
-    partial class CourseContextModelSnapshot : ModelSnapshot
+    [Migration("20230323112628_AttendeeMistakesFixed")]
+    partial class AttendeeMistakesFixed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

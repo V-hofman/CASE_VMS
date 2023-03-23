@@ -1,5 +1,6 @@
 ﻿using CASE_VMS_Backend.Courses.Exceptions;
 using CASE_VMS_Backend.Courses.Models;
+using CASE_VMS_Backend.Courses.Repository.Interfaces;
 using CASE_VMS_Backend.DAL;
 using Microsoft.EntityFrameworkCore;
 

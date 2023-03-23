@@ -1,5 +1,6 @@
 ﻿using CASE_VMS_Backend.Courses.Models;
-using CASE_VMS_Backend.Courses.Repository;
+using CASE_VMS_Backend.Courses.Repository.Interfaces;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -69,7 +70,7 @@ namespace CASE_VMS_Backend.Courses.FileHandler
                             courseWrapper.Duration = int.Parse(Regex.Match(c.Split(":")[1], @"\d+").Value);
                             break;
                         case string d when d.Contains("Startdatum:"):
-                            courseWrapper.StartDate = DateOnly.ParseExact(d.Split(":")[1].Trim(), "d/MM/yyyy");
+                            courseWrapper.StartDate = DateTime.Parse(d.Split(":")[1].Trim(), new CultureInfo("nl-NL"));
                             break;
                         case string e when string.IsNullOrWhiteSpace(e):
                             CourseWrappers.Add(courseWrapper);
@@ -93,8 +94,8 @@ namespace CASE_VMS_Backend.Courses.FileHandler
             foreach (var wrapper in CourseWrappers)
             {
                 var Course = new CourseModel(durationInDays: wrapper.Duration, courseTitle: wrapper.Title, courseCode: wrapper.CourseCode);
-                var CourseResponse = new CourseResponseDTO(duration: wrapper.Duration, title: wrapper.Title, startDate: wrapper.StartDate);
-                var CourseInstance = new CourseInstance(startTime: wrapper.StartDate, course: Course);
+                var CourseResponse = new CourseResponseDTO(duration: wrapper.Duration, title: wrapper.Title, startDate: DateOnly.FromDateTime(wrapper.StartDate));
+                var CourseInstance = new CourseInstance(startTime: DateOnly.FromDateTime(wrapper.StartDate), course: Course);
                 Courses.Add(Course);
                 CourseResponseDTOs.Add(CourseResponse);
                 CourseInstances.Add(CourseInstance);

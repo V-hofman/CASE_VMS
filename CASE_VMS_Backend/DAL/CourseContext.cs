@@ -1,4 +1,5 @@
 ﻿using CASE_VMS_Backend.Courses.Models;
+using CASE_VMS_Backend.Courses.Models.AttendeeModels;
 using CASE_VMS_Backend.DAL.ModelConfigurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace CASE_VMS_Backend.DAL
     {
         public DbSet<CourseModel> Courses { get; set; }
         public DbSet<CourseInstance> CourseInstances { get; set; }
+        public DbSet<AttendeeModel> Attendees { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
@@ -28,6 +30,7 @@ namespace CASE_VMS_Backend.DAL
 
             modelBuilder.ApplyConfiguration<CourseModel>(new CourseConfig());
             modelBuilder.ApplyConfiguration<CourseInstance>(new CourseInstanceConfig());
+            modelBuilder.ApplyConfiguration<AttendeeModel>(new AttendeeConfig());
         }
     }
 }

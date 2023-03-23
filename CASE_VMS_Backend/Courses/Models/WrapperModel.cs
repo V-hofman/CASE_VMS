@@ -6,6 +6,6 @@
         public string Title { get; set; }
         public string CourseCode { get; set; }
         public int Duration { get; set; }
-        public DateOnly StartDate { get; set; }
+        public DateTime StartDate { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using CASE_VMS_Backend.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CASE_VMS_Backend.Migrations
 {
     [DbContext(typeof(CourseContext))]
-    partial class CourseContextModelSnapshot : ModelSnapshot
+    [Migration("20230323102618_AttendeesAdded")]
+    partial class AttendeesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +68,7 @@ namespace CASE_VMS_Backend.Migrations
 
                     b.HasIndex("PrivateInfoId");
 
-                    b.ToTable("Attendees", (string)null);
+                    b.ToTable("AttendeeModel");
                 });
 
             modelBuilder.Entity("CASE_VMS_Backend.Courses.Models.AttendeeModels.CorporateInfoModel", b =>

@@ -1,7 +1,13 @@
-﻿namespace CASE_VMS_Backend.Courses.Models.AttendeeModels
+﻿using System.Text.Json.Serialization;
+
+namespace CASE_VMS_Backend.Courses.Models.AttendeeModels
 {
     public class AttendeeModel
     {
+        public AttendeeModel()
+        {
+        }
+
         public AttendeeModel(string name, string surname)
         {
             Name = name;
@@ -26,7 +32,19 @@
         public string Name { get; set; }
         public string Surname { get; set; }
 
+        [JsonIgnore]
         public CorporateInfoModel? CorporateInfo { get; set; }
+        [JsonIgnore]
         public PrivateInfoModel? PrivateInfo { get; set; }
+        [JsonIgnore]
+        public virtual List<CourseInstance> Courses { get; set; } = new();
     }
+
+    public class AttendeeModelDTO
+    {
+        public string FirstName { get; set; }
+        public string Surname { get; set; }
+        public int courseId { get; set; }
+    }
+
 }
