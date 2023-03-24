@@ -18,13 +18,19 @@ daarin is gemaakt.*
 - *Resultaat bekijken.*
 foutmeldingen worden op de angular frontend getoond, echter nog niets ter confirmatie.
 
-- *Geen bestaande of dubbele cursus-instanties importeren.*
-De tekst wordt verwerkt en toegevoegd echter er wordt niet gecontroleerd of er dubbele boekingen zijn, hierover is nog een onduidelijk punt, namelijk tot hoeverre ze uniek moeten zijn. wordt vervolgt
-
 ### *Conclusie:*
 Productieve dag, echter liep ik even vast op het testen van Angular Materials en het databinden van de Angular Material Tables, dit is inmiddels opgelost.
 
 ---
 
+## Dag 2
+---
+### Op de planning stond:
+- [x]
+- [x]
+- [x]
+- [x]
+- [x]
+- [x]
 
 

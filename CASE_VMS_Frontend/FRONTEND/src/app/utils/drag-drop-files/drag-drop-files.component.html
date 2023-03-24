@@ -1,0 +1,43 @@
+<div class="dropzone">
+  <input type="file" accept=".txt" (change)="updateFile($event)" />
+</div>
+<div>
+  <form [formGroup]="manualDate" (ngSubmit)="getFile($event)">
+    <label for="start">Start date:</label>
+    <input
+      type="date"
+      id="start"
+      name="trip-start"
+      value="{{ minDate | date : 'yyyy-MM-dd' }}"
+      min="{{ minDate | date : 'yyyy-MM-dd' }}"
+      formControlName="manualStartDate"
+    />
+
+    <br />
+
+    <label for="end">End date:</label>
+
+    <input
+      type="date"
+      id="end"
+      name="trip-end"
+      value="{{ minDate | date : 'yyyy-MM-dd' }}"
+      min="{{ minDate | date : 'yyyy-MM-dd' }}"
+      formControlName="manualEndDate"
+    />
+    <button>Stuur op!</button>
+  </form>
+
+  <p>
+    Let op! indien er een duur en startdatum in het bestand staan, zal deze
+    prioriteit krijgen!<br />
+  </p>
+</div>
+<br />
+
+<div *ngIf="errors.length > 0">
+  <p *ngFor="let error of errors">{{ error }}</p>
+</div>
+<div *ngIf="feedback.length > 0">
+  <p *ngFor="let line of feedback">{{ line }}</p>
+</div>

@@ -1,0 +1,23 @@
+<br>
+<h3>Ingeschreven studenten:</h3>
+<div *ngIf="students.length > 0">
+
+    <ul>
+        <li *ngFor="let student of students">
+            <p>{{student.FirstName + " " + student.SurName}}</p>
+        </li>
+    </ul>
+</div>
+<div *ngIf="students.length == 0">
+    <p>Nog niemand is ingeschreven :c</p>
+</div>
+
+<button (click)="ToggleAddingStudent()">Voeg nieuwe student toe!</button>
+<div  *ngIf="students.length < 12">
+    <BLD-new-cursist-form class="studentForm" (toggleAddingStudent)="ToggleAddingStudent()" (addedNewStudent)="AddedNewStudent($event)" *ngIf="addingStudent"></BLD-new-cursist-form>
+</div>
+<div *ngIf="students.length >= 12">
+    <p>U kunt helaas niemand meer toevoegen het zit VOL!</p>
+</div>
+
+<br>

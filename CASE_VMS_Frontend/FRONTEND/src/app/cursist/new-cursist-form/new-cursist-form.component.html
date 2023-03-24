@@ -1,0 +1,11 @@
+<form [formGroup]="attendeeForm" (ngSubmit)="SendStudent()">
+  <label for="first-name">First Name: </label>
+  <input id="first-name" type="text" formControlName="firstName">
+    <br>
+  <label for="last-name">Last Name: </label>
+  <input id="last-name" type="text" formControlName="lastName"><br>
+  <button>Voeg toe</button>
+  <div>
+    <p *ngFor="let message of response">{{message}}</p>
+  </div>
+</form>

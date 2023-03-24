@@ -1,0 +1,68 @@
+
+<h1>Lijst met Cursussen</h1>
+
+<div class="buttonContainer" *ngIf="weekNumberBeingViewed !== undefined && yearNumberBeingViewed !== undefined">
+  <button id="yearBack" type="button" (click)="ChangeYearNumber(-1)">Jaar terug</button>
+  <button id="weekBack"type="button" (click)="ChangeWeekNumber(-1)">Week terug</button>
+  <p>Week: {{weekNumberBeingViewed}} van {{yearNumberBeingViewed}}</p>
+  <button type="button" (click)="ChangeWeekNumber(1)">Week vooruit</button>
+  <button type="button" (click)="ChangeYearNumber(1)">Jaar vooruit</button>
+  <br>
+  <p>Of zoek handmatig:</p><br><br>
+  <form [formGroup]="manualDate" (ngSubmit)="HandleManualSearchInput()">
+    <div>
+      <label for="week">Weeknummer:</label><br>
+      <input id="week" type="number" formControlName="manualWeek" required placeholder="Weeknummer" min="1" max="52">
+    </div>
+    <div>
+      <label for="year">Jaar:</label><br>
+      <input id="year" type="number" formControlName="manualYear" required placeholder="Jaar nummer">
+    </div>
+    <button>Zoek!</button>
+  </form>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #empTbSort="matSort">
+
+  <ng-container matColumnDef="Id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Id:</mat-header-cell>
+    <mat-cell *matCellDef="let row;">{{row.Id}}</mat-cell>
+  </ng-container>
+
+<!--Column for Startdate-->
+  <ng-container matColumnDef="StartDate">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Start Datum</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.StartDate | date:'dd/MM/yyyy' }}</mat-cell>
+  </ng-container>
+
+  <!--Column for Duration-->
+    <ng-container matColumnDef="Duration">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Aantal Dagen</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.Duration}}</mat-cell>
+  </ng-container>
+
+  <!--Column for Title-->
+    <ng-container matColumnDef="Title">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Naam Cursus</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.Title}}</mat-cell>
+  </ng-container>
+
+  <!--Column for NumberOfSignedIn-->
+    <ng-container matColumnDef="NumberOfSignedIn">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Aantal Deelnemers</mat-header-cell>
+    <mat-cell *matCellDef="let row;"><button id="attendeeButton" (click)="GoToDetailView(row.Id)">{{row.NumberOfSignedIn}}</button></mat-cell>
+  </ng-container>
+
+  <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row mat-row *matRowDef="let emprow; columns: displayedColumns;"></mat-row>
+  <div *matNoDataRow>
+    Geen curssussen ingeplanned in deze week
+  </div>
+</table>
+<mat-paginator #paginator [pageSizeOptions]="[10, 20, 50, dataSource.data.length]" showFirstLastButtons></mat-paginator>
+
+<div *ngIf="courseBeingViewed !== undefined">
+  <BLD-cursus-detail-view (StudentsChanged)="UpdateStudentNumber($event)"></BLD-cursus-detail-view>
+</div>
+
+<router-outlet></router-outlet>

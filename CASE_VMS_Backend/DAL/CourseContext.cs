@@ -11,6 +11,10 @@ namespace CASE_VMS_Backend.DAL
         {
         }
 
+        protected CourseContext()
+        {
+        }
+
         public DbSet<CourseModel> Courses { get; set; }
         public DbSet<CourseInstance> CourseInstances { get; set; }
         public DbSet<AttendeeModel> Attendees { get; set; }

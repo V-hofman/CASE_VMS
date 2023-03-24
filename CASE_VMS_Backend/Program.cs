@@ -4,6 +4,7 @@ using CASE_VMS_Backend.Courses.Repository.Interfaces;
 using CASE_VMS_Backend.Courses.Services;
 using CASE_VMS_Backend.Courses.Services.Interfaces;
 using CASE_VMS_Backend.DAL;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,15 +26,14 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddSingleton<CourseContext>();
 builder.Services.AddTransient<ICourseRepository, CourseRepository>();
 builder.Services.AddTransient<ICourseInstanceRepository, CourseInstanceRepository>();
 builder.Services.AddTransient<IAttendeeRepository, AttendeeRepository>();
 builder.Services.AddTransient<IStudentService, StudentService>();
 builder.Services.AddTransient<ICourseService, CourseService>();
 
-
 builder.Services.AddTransient<FileToCourseParser>();
+builder.Services.AddDbContext<CourseContext>();
 
 var app = builder.Build();
 

@@ -1,0 +1,44 @@
+h1{
+    text-align: center;
+}
+
+.buttonContainer{
+    border: solid 1px goldenrod;
+    width: fit-content;
+    margin: auto;
+    padding: 1%;
+    text-align: center;
+    margin-bottom: 30px;
+    
+}
+.buttonContainer p{
+    display: inline;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.buttonContainer button{
+    display: inline;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.buttonContainer div{
+    display: inline block;
+}
+.buttonContainer input{
+    width: 100px;
+}
+
+.buttonContainer form button{
+    margin-top:10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#attendeeButton{
+    background:none;
+    border:none;
+    text-decoration: underline;
+    color:blue
+}
+
+
