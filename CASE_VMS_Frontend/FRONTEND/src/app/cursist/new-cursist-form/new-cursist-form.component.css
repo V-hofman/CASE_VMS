@@ -1,0 +1,16 @@
+input{
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+
+    transition: 0.5s;
+    outline: none;
+}
+button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 2em;
+    border: none;
+    cursor: pointer;
+}
