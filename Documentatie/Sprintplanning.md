@@ -18,19 +18,51 @@ daarin is gemaakt.*
 - *Resultaat bekijken.*
 foutmeldingen worden op de angular frontend getoond, echter nog niets ter confirmatie.
 
-### *Conclusie:*
-Productieve dag, echter liep ik even vast op het testen van Angular Materials en het databinden van de Angular Material Tables, dit is inmiddels opgelost.
 
 ---
 
 ## Dag 2
 ---
 ### Op de planning stond:
-- [x]
-- [x]
-- [x]
-- [x]
-- [x]
-- [x]
+- [x] Resultaat bekijken
+- [x] Geen bestaande of dubbele cursus-instanties importeren
+- [x] Geen Cursusplanning in incorrect formaat importeren
+- [x] Foutmdeling bekijken
+- [x] Geen cursusplanning met verkeerde data importeren
+- [x] Melden hoeveel duplicaten er zijn tegengekomen
+
+---
+## Dag 3
+---
+
+### Op de planning stond:
+- [x] Huidige week tonen
+- [x] Weeknummer (en jaar) kunnen kiezen
+- [x] Lijst in gekozen week tonen
+- [x] Weekoverzicht in favorieten
+- [x] Navigeren naar volgende en vorige week
+- [x] begin- en einddatum opgeven
+
+---
+## Dag 4
+---
+### Op de planning stond:
+- [x] Cursusinstantie kiezen
+- [x] Voor- en achternaam cursist invullen
+- [ ] Melding krijgen dat inschrijving mislukt is
+
+### Diegene die niet afzijn waar ben ik?
+- Melding krijgen dat inschrijving mislukt is:
+Krijg het niet voor elkaar op tijd om dit te pushen naar frontend.
+
+---
+## Dag 5
+---
+### Op de planning stond:
+- [x] Melding krijgen dat inschrijving mislukt is
+- [x] Presentielijst maken
+
+
+
 
 

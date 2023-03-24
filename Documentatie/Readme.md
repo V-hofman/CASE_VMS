@@ -12,7 +12,7 @@ De frontend is ontwikkeld met:
 
 De backend is ontwikkeld met:
 - .Net 7
-- MSSQL Server
+- MSSQL Server (ik gebruikte 2019)
 
 De packages die nodig zijn voor de front-end kunt u installeren via:
 `npm i` of `npm install`
@@ -27,7 +27,12 @@ Hier ga ik vanuit dat de bovenstaande systeem eisen aan worden voldaan, anders k
 ## Het is geinstalleerd wat nu?
 
 - Advies is om eerst de database op te zetten:
-WORK IN PROGRESS
+[Handleiding Microsoft](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)
+
+in de terminal roep aan:
+`dotnet ef database update`
+of in package manager console:
+`Update-Database`
 
 - Daarna start u de back-end applicatie op:
 `dotnet run` of via F5 binnen visual studio.
