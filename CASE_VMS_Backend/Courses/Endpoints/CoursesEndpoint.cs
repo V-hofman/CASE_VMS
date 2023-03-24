@@ -22,6 +22,10 @@ namespace CASE_VMS_Backend.Courses.Endpoints
             _courseService = courseService;
         }
 
+        /// <summary>
+        /// Endpoint to get all the courses
+        /// </summary>
+        /// <returns>Http action code with a courseResponseDTO</returns>
         [HttpGet]
         public async Task<ActionResult<CourseResponseDTO>> GetCourses()
         {
@@ -30,7 +34,11 @@ namespace CASE_VMS_Backend.Courses.Endpoints
         }
 
 
-
+        /// <summary>
+        /// Endpoint to post a new course
+        /// </summary>
+        /// <param name="file">.txt file to be uploaded</param>
+        /// <returns>Accepted ActionResult, with a long string with duplicates and how many were added</returns>
         [HttpPost]
         public async Task<ActionResult<CourseResponseDTO>> PostCourse(IFormFile file)
         {
@@ -40,6 +48,11 @@ namespace CASE_VMS_Backend.Courses.Endpoints
 
         }
 
+        /// <summary>
+        /// Endpoint to post a new course
+        /// </summary>
+        /// <param name="wrappers">Array of WrapperModel</param>
+        /// <returns>Accepted or badrequest if it already exists</returns>
         [HttpPost]
         [Route("json")]
         public async Task<ActionResult<WrapperModel[]>> PostCourseJson([FromBody] WrapperModel[] wrappers)
