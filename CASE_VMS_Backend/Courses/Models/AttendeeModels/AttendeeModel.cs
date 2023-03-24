@@ -42,6 +42,17 @@ namespace CASE_VMS_Backend.Courses.Models.AttendeeModels
 
     public class AttendeeModelDTO
     {
+        public AttendeeModelDTO()
+        {
+        }
+
+        public AttendeeModelDTO(string firstName, string surname, int courseId)
+        {
+            FirstName = firstName;
+            Surname = surname;
+            this.courseId = courseId;
+        }
+
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public int courseId { get; set; }

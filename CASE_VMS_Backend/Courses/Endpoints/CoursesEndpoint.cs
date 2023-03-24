@@ -2,6 +2,7 @@
 using CASE_VMS_Backend.Courses.FileHandler;
 using CASE_VMS_Backend.Courses.Models;
 using CASE_VMS_Backend.Courses.Repository.Interfaces;
+using CASE_VMS_Backend.Courses.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CASE_VMS_Backend.Courses.Endpoints
@@ -10,37 +11,22 @@ namespace CASE_VMS_Backend.Courses.Endpoints
     [Route("api/courses")]
     public class CoursesEndpoint : ControllerBase
     {
-        private ICourseRepository _courseRepository;
-        private ICourseInstanceRepository _courseInstanceRepository;
-        private FileToCourseParser _fileToCourseParser;
+        private readonly ICourseInstanceRepository _courseInstanceRepository;
+        private readonly FileToCourseParser _fileToCourseParser;
+        private readonly ICourseService _courseService;
 
-        public CoursesEndpoint(ICourseRepository courseRepository, FileToCourseParser fileToCourseParser, ICourseInstanceRepository courseInstanceRepository)
-        {
-            _courseRepository = courseRepository;
+        public CoursesEndpoint( FileToCourseParser fileToCourseParser, ICourseInstanceRepository courseInstanceRepository, ICourseService courseService)
+        { 
             _fileToCourseParser = fileToCourseParser;
             _courseInstanceRepository = courseInstanceRepository;
+            _courseService = courseService;
         }
 
         [HttpGet]
         public async Task<ActionResult<CourseResponseDTO>> GetCourses()
         {
-            var courseInstances = await _courseInstanceRepository.GetAllAsync();
-            List<CourseInstance> instances = new();
-            List<CourseResponseDTO> courseResponses = new();
-
-            foreach (var instance in courseInstances) 
-            {
-                if(instance.CourseId == null)
-                {
-                    Console.WriteLine("Found detached course, skipping!");
-                    continue;
-                }else
-                {
-                    var response = new CourseResponseDTO(startDate: instance.StartTime, duration: instance.Course.DurationInDays, title: instance.Course.CourseTitle, id: instance.Id, attendees: instance.Attendees);
-                    courseResponses.Add(response);
-                }
-            }
-            return Ok(courseResponses);
+            var result = await _courseService.GetAllCourseInstances();
+            return Ok(result);
         }
 
 
@@ -68,8 +54,8 @@ namespace CASE_VMS_Backend.Courses.Endpoints
                     var Course = new CourseModel(durationInDays: wrapper.Duration, courseTitle: courseTitle, courseCode: courseCode);
                     var CourseInstance = new CourseInstance(startTime: DateOnly.FromDateTime(wrapper.StartDate), course: Course);
 
-                    await _courseRepository.AddAsync(Course);
-                    await _courseInstanceRepository.AddAsync(CourseInstance);
+                    await _courseService.AddNewCourseJson(Course);
+                    await _courseService.AddNewCourseInstanceJson(CourseInstance);
                 }
             }
             catch

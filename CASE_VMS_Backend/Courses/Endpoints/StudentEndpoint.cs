@@ -1,6 +1,6 @@
 ﻿using CASE_VMS_Backend.Courses.Models.AttendeeModels;
 using CASE_VMS_Backend.Courses.Repository.Interfaces;
-using CASE_VMS_Backend.Courses.Services;
+using CASE_VMS_Backend.Courses.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CASE_VMS_Backend.Courses.Endpoints

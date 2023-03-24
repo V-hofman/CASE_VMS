@@ -2,6 +2,7 @@
 using CASE_VMS_Backend.Courses.Repository;
 using CASE_VMS_Backend.Courses.Repository.Interfaces;
 using CASE_VMS_Backend.Courses.Services;
+using CASE_VMS_Backend.Courses.Services.Interfaces;
 using CASE_VMS_Backend.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,7 @@ builder.Services.AddTransient<ICourseRepository, CourseRepository>();
 builder.Services.AddTransient<ICourseInstanceRepository, CourseInstanceRepository>();
 builder.Services.AddTransient<IAttendeeRepository, AttendeeRepository>();
 builder.Services.AddTransient<IStudentService, StudentService>();
+builder.Services.AddTransient<ICourseService, CourseService>();
 
 
 builder.Services.AddTransient<FileToCourseParser>();

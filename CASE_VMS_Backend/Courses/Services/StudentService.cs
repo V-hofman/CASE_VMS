@@ -2,6 +2,7 @@
 using CASE_VMS_Backend.Courses.Models.AttendeeModels;
 using CASE_VMS_Backend.Courses.Repository;
 using CASE_VMS_Backend.Courses.Repository.Interfaces;
+using CASE_VMS_Backend.Courses.Services.Interfaces;
 
 namespace CASE_VMS_Backend.Courses.Services
 {
